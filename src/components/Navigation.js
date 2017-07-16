@@ -1,6 +1,5 @@
 import {
     default as React,
-    Component,
     } from "react";
 
 import {
@@ -26,32 +25,25 @@ import {
     //MenuItem,
     } from "react-bootstrap";
 
-export default class Navigation extends Component {
-    render() {
-        return (
-
-
-                <Router>
-                    <section>
-                        <Navbar fluid>
-                            <Navbar.Header>
-                                <Navbar.Brand>
-                                    <Link to="/">
-                                        MAAS API example | Nissa Blagojevic
-                                    </Link>
-                                </Navbar.Brand>
-                            </Navbar.Header>
-                            <Nav>
-                                <NavItem href="/about">About</NavItem>
-                            </Nav>
-                        </Navbar>
-                        <Route exact path="/" component={Timeline}/>
-                        <Route path="/about" component={About}/>
-                    </section>
-                </Router>
-
-
-
-        );
-    }
+export default function Navigation(props) {
+    return (
+        <Router>
+            <section>
+                <Navbar fluid>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <Link to="/">
+                                MAAS API example | Nissa Blagojevic
+                            </Link>
+                        </Navbar.Brand>
+                    </Navbar.Header>
+                    <Nav>
+                        <NavItem href="/about">About</NavItem>
+                    </Nav>
+                </Navbar>
+                <Route exact path="/" component={Timeline}/>
+                <Route path="/about" component={About}/>
+            </section>
+        </Router>
+    );
 }

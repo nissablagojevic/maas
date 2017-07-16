@@ -3,54 +3,57 @@ import {
     Component,
     } from "react";
 
-import {
-    graphql,
-    GraphQLSchema,
-    GraphQLObjectType,
-    GraphQLString,
-    buildSchema
-    } from 'graphql';
-
 
 export default class Api extends Component {
+
     constructor() {
         super();
         this.state = {
-            query: '{ objects }',
-            result: 'None yet',
+            url: 'https://api.maas.museum/graphql',
+            query: '{objects(limit:20){_id}}',
+            result: '',
         };
     }
 
-    querySchema() {
-        var schema = buildSchema(`
-            type Query {
-                objects: String
-            }
-        `);
+    componentDidMount() {
+        var another = this.fetchQuery(this.state.query);
+        console.log(another);
+    }
 
-        var root = {
-            objects: () => {
-                return 'Hello world!';
+    fetchQuery(
+        operation,
+        variables,
+        cacheConfig,
+        uploadables,
+    ) {
+        return fetch(this.state.url, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
             },
-        };
-
-        graphql(schema, this.state.query, root).then(result => {
-
-            // Prints
-            // {
-            //   data: { objects: "world" }
-            // }
-            this.setState({result: result.data.objects});
-        });
-
-
+            body: JSON.stringify({
+                query: this.state.query,
+            }),
+        }).then(this.handleErrors)
+            .then(response => {
+            return response.json() })
+            .then( (json) => {
+                this.setState({result: JSON.stringify(json)});
+            });
     }
 
+    handleErrors(response) {
+        console.log(response);
+        if (!response.ok) {
+            console.log("FETCH ERROR: " + response.status + ' -- ' + response.statusText);
+        }
+        return response;
+    }
 
     render() {
         return (
             <div className="json">
-                <p onClick={() => this.querySchema()}>{this.state.query}</p>
+                <p >{this.state.query}</p>
                 <p>{this.state.result}</p>
             </div>
         );
