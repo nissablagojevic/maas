@@ -3,21 +3,70 @@ import {
     Component,
     } from "react";
 
+import {
+    Collection
+    } from "./";
 
-export default class Api extends Component {
+
+class Api extends Component {
 
     constructor() {
         super();
         this.state = {
             url: 'https://api.maas.museum/graphql',
-            query: '{objects(limit:20){_id}}',
+            query: `{ objects(limit: 20)
+                        {
+                            _id
+                            displayTitle
+                            category
+                            production {
+                                date
+                                dateEarliest
+                                dateLatest
+                            }
+                        } }`,
             result: '',
+            limit: 20,
+            collection: 'Loading...',
+            items: 'Loading...'
         };
     }
 
     componentDidMount() {
-        var another = this.fetchQuery(this.state.query);
-        console.log(another);
+        this.fetchQuery(this.state.query)
+            .then( (json) => {
+                return json.data;
+            })
+            .then( (data) => {
+
+                if(typeof data === 'object') {
+                        this.setState({
+                            result: JSON.stringify(data),
+                            collection: this.renderCollection(data)},
+                            console.log('state set'));
+
+                }
+            })
+            .then( () => {
+                console.log("END");
+            });
+    }
+
+    renderCollection(data) {
+        var objects = data.objects;
+        if(objects.length > 0) {
+            var collection = objects.map(function (item, k) {
+                return (item);
+            });
+            return(<Collection amount={this.state.limit} result={this.state.result} collection={JSON.stringify(collection)}/>);
+        }
+    }
+
+    createQuery() {
+        var query = this.state.query;
+
+
+        return query;
     }
 
     fetchQuery(
@@ -36,14 +85,10 @@ export default class Api extends Component {
             }),
         }).then(this.handleErrors)
             .then(response => {
-            return response.json() })
-            .then( (json) => {
-                this.setState({result: JSON.stringify(json)});
-            });
+            return response.json() });
     }
 
     handleErrors(response) {
-        console.log(response);
         if (!response.ok) {
             console.log("FETCH ERROR: " + response.status + ' -- ' + response.statusText);
         }
@@ -53,11 +98,15 @@ export default class Api extends Component {
     render() {
         return (
             <div className="json">
+                <h2>Query</h2>
                 <p >{this.state.query}</p>
+                <h2>Result</h2>
                 <p>{this.state.result}</p>
+                <h2>Collection</h2>
+                {this.state.collection}
             </div>
         );
     }
 }
 
-
+export default Api;

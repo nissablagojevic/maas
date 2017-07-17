@@ -6,9 +6,15 @@ import Api from "./Api";
 
 import Timeline from "./Timeline";
 
+import Item from "./Item";
+
+import Collection from "./Collection";
+
 export {
     Timeline,
     Navigation,
     About,
-    Api
+    Api,
+    Item,
+    Collection
     };
