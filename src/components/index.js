@@ -10,11 +10,14 @@ import Item from "./Item";
 
 import Collection from "./Collection";
 
+import Chart from "./Chart";
+
 export {
     Timeline,
     Navigation,
     About,
     Api,
     Item,
-    Collection
+    Collection,
+    Chart,
     };

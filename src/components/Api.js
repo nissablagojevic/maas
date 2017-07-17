@@ -8,6 +8,7 @@ import {
     } from "./";
 
 
+
 class Api extends Component {
 
     constructor() {
@@ -98,11 +99,11 @@ class Api extends Component {
     render() {
         return (
             <div className="json">
-                <h2>Query</h2>
+                <h3>Query</h3>
                 <p >{this.state.query}</p>
-                <h2>Result</h2>
+                <h3>Result</h3>
                 <p>{this.state.result}</p>
-                <h2>Collection</h2>
+                <h3>Collection</h3>
                 {this.state.collection}
             </div>
         );

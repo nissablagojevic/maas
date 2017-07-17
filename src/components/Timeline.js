@@ -4,15 +4,18 @@ import {
 
 import {
     Api,
+    Chart
     } from "./";
 
 function Timeline(props) {
 
         return (
             <div className="Timeline">
-                <Api />
+            {/*<h2>API</h2>
+                <Api />*/}
+                <h2>Chart</h2>
+                <Chart />
 
-                <p>This is the timeline content and homepage.</p>
             </div>
         );
 

@@ -39,7 +39,7 @@ class Collection extends Component {
         return (
             <div className="collection">
             {this.props.collection}
-                <h3>Items</h3>
+                <h4>Items</h4>
                     {this.state.items}
             </div>
         );

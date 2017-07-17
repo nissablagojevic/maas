@@ -6,9 +6,9 @@ export default function About(props){
     return (
         <section>
             <h2>Technologies</h2>
-            <p>Yarn, React, GraphQL, React Bootstrap, React Router Dom</p>
+            <p>Yarn, React, GraphQL, React Bootstrap, React Router Dom, Highcharts, git, </p>
             <h2>Process</h2>
-            <p>Process information goes here</p>
+            <p></p>
         </section>
 
     );
