@@ -5,46 +5,28 @@ import {
 
 import Highcharts from "highcharts";
 
-import {
-    Item
-    } from "./";
-
 import ReactHighcharts from "react-highcharts";
-
-
 
 class Chart extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             options: this.props.opts
         };
-
-
-        console.log("CHART");
     }
 
     componentDidMount() {
-        console.log("CHART MOUNTED");
-        //this.defineExtremes();
+        this.defineExtremes();
     }
 
     componentWillUnmount() {
         this.chart.destroy();
     }
 
-
-
     defineExtremes() {
-        console.log("defining extremes");
-        console.log(this.props.options);
         var maxSeriesData = this.props.options.series[0].data.length - 1;
 
-
             var extremes = Highcharts.charts[0].series[0].xAxis.getExtremes();
-
-
 
             var setExt = {
                 min: this.props.options.series[0].data[0][0],
@@ -63,26 +45,19 @@ class Chart extends Component {
                 setExt.min,
                 setExt.max
             );
-
     }
 
     /**
      * Initialises chart
      */
     renderChart(config) {
-        console.log("CREATE CHART");
         return(<ReactHighcharts config={config}/>);
-
-
     }
 
     render() {
         return(
             <div id="chart">
-            {console.log("RENDER CHART")}
-            {console.log(this.state.options)}
             {this.renderChart(this.state.options)}
-
             </div>
         );
     }
@@ -98,8 +73,13 @@ Chart.defaultProps = {
             resetZoomButton: {
                 relativeTo: 'chart'
             },
-            type: 'line',
-            zoomType: 'x'
+            type: 'column',
+            zoomType: 'x',
+            events: {
+                load: function(){
+                    //this.myTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
+                }
+            }
         },
         credits: {
             enabled: false
@@ -111,13 +91,27 @@ Chart.defaultProps = {
         navigator: {
             adaptToUpdatedData: false
         },
-        plotLines: {
-            style: {
-                visibility: "hidden"
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                cursor: 'pointer',
+                events: {
+                    click: function(evt) {
+                        //this.chart.myTooltip.refresh(evt.point, evt);
+                    }
+                },
+                pointWidth: 10,
+                point: {
+                    events: {
+                        click: function () {
+                            console.log('value: ' + this.x);
+                        }
+                    }
+                },
+                stickyTracking: false
             }
         },
         series: [{
-            name: 'Loading...',
             type: 'column'
         }],
         subtitle: {
@@ -127,9 +121,13 @@ Chart.defaultProps = {
             text: 'title'
         },
         tooltip: {
-            shared: true,
+            followPointer: false,
+            headerFormat: '',
+            shared: false,
             valueDecimals: 2,
-            xDateFormat: '%d %B %Y'
+            xDateFormat: '%d %B %Y',
+            useHTML: true,
+            zIndex: 100
         },
         xAxis: [{
             crosshair: true,
@@ -142,16 +140,9 @@ Chart.defaultProps = {
                 month: '%b \'%y',
                 year: '%Y'
             },
-            plotLines: {
-                style: {
-                    color: "red"
-                    //visibility: "hidden"
-                }
-            },
             labels: {
                 rotation: 0
             },
-            //minTickInterval: 24 * 3600 * 1000,
             opposite: true,
             type: 'datetime',
         }],

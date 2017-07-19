@@ -8,8 +8,6 @@ import Timeline from "./Timeline";
 
 import Item from "./Item";
 
-import PlotLine from "./PlotLine";
-
 import Series from "./Series";
 
 import Chart from "./Chart";
@@ -22,5 +20,4 @@ export {
     Item,
     Chart,
     Series,
-    PlotLine
     };

@@ -2,21 +2,23 @@ import {
     default as React
     } from "react";
 
-function Item(props){
 
+
+
+function Item(props){
+    var title = props.title || 'Untitled';
         return (
-            <button className="item-tile" id={'itemTile' + props.id}>
-                <a className="item-tile__image-holder">
-                    <div className="tile-image-tag">{props.category}</div>
+            <button className="item-tile" id={'itemTile' + props.id} style={{pointerEvents: 'visible'}} >
+                <div className="tile-image-tag">{props.category}</div>
+                {props.name}
+                <a className="item-tile__image-holder" href="#">
                     <div className="maas-image object-image is-loaded has-aspect-ratio">
-                        <img src="https://placekitten.com/200/140" alt="Item name"/>
+                        <img src={props.image}/>
                     </div>
                 </a>
                 <div className="tile-info tile-info--is-breakout">
                     <div className="tile-info__body">
-                        <h2 className="tile-info__title">
-                        {props.title}
-                        </h2>
+                        <h2>{`${title}`}</h2>
                         <p>{props.date}</p>
                         <p>{props.dateEarliest}</p>
                         <p>{props.dateLatest}</p>
