@@ -14,18 +14,18 @@ import {
 
 function Navigation(props) {
     return (
-                <Navbar fluid>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <Link to="/">
-                                MAAS API example | Nissa Blagojevic
-                            </Link>
-                        </Navbar.Brand>
-                    </Navbar.Header>
-                    <Nav>
-                        <NavItem href="/about">About</NavItem>
-                    </Nav>
-                </Navbar>
+        <Navbar fluid>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    <Link to="/">
+                        MAAS API example | Nissa Blagojevic
+                    </Link>
+                </Navbar.Brand>
+            </Navbar.Header>
+            <Nav>
+                <NavItem href="/about">About</NavItem>
+            </Nav>
+        </Navbar>
     );
 }
 

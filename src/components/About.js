@@ -3,7 +3,7 @@ import {
     } from "react";
 
 
-export default function About(props){
+export default function About(props) {
     var packageJson = `{
     "name": "maas",
         "version": "0.1.0",

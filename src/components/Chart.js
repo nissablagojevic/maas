@@ -26,43 +26,42 @@ class Chart extends Component {
     defineExtremes() {
         var maxSeriesData = this.props.options.series[0].data.length - 1;
 
-            var extremes = Highcharts.charts[0].series[0].xAxis.getExtremes();
+        var extremes = Highcharts.charts[0].series[0].xAxis.getExtremes();
 
-            var setExt = {
-                min: this.props.options.series[0].data[0][0],
-                max: this.props.options.series[0].data[maxSeriesData][0]
-            };
+        var setExt = {
+            min: this.props.options.series[0].data[0][0],
+            max: this.props.options.series[0].data[maxSeriesData][0]
+        };
 
-            //i want to set it to the largest min and the smallest max for init
-            if (extremes.max < setExt.max) {
-                setExt.max = extremes.max;
-            }
-            if (extremes.min > setExt.min) {
-                setExt.min = extremes.min;
-            }
+        //i want to set it to the largest min and the smallest max for init
+        if (extremes.max < setExt.max) {
+            setExt.max = extremes.max;
+        }
+        if (extremes.min > setExt.min) {
+            setExt.min = extremes.min;
+        }
 
-            Highcharts.charts[0].xAxis[0].setExtremes(
-                setExt.min,
-                setExt.max
-            );
+        Highcharts.charts[0].xAxis[0].setExtremes(
+            setExt.min,
+            setExt.max
+        );
     }
 
     /**
      * Initialises chart
      */
     renderChart(config) {
-        return(<ReactHighcharts config={config}/>);
+        return (<ReactHighcharts config={config}/>);
     }
 
     render() {
-        return(
+        return (
             <div id="chart">
             {this.renderChart(this.state.options)}
             </div>
         );
     }
 }
-
 
 
 Chart.defaultProps = {
@@ -76,7 +75,7 @@ Chart.defaultProps = {
             type: 'column',
             zoomType: 'x',
             events: {
-                load: function(){
+                load: function () {
                     //this.myTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
                 }
             }
@@ -96,7 +95,7 @@ Chart.defaultProps = {
                 borderWidth: 0,
                 cursor: 'pointer',
                 events: {
-                    click: function(evt) {
+                    click: function (evt) {
                         //this.chart.myTooltip.refresh(evt.point, evt);
                     }
                 },

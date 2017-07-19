@@ -12,7 +12,6 @@ import {
     } from "./";
 
 
-
 class Api extends Component {
 
     constructor(props) {
@@ -47,36 +46,30 @@ class Api extends Component {
 
     componentDidMount() {
         this.fetchQuery(this.state.query)
-            .then( (json) => {
+            .then((json) => {
                 return json.data;
             })
-            .then( (data) => {
+            .then((data) => {
 
-                if(typeof data === 'object') {
-                    console.log("PRE RENDER");
+                if (typeof data === 'object') {
                     var items = this.renderItems(data);
                     var chartConfig = this.state.options;
-                    console.log("CHART CONFIG ABOUT TO BE USED");
-                    console.log(chartConfig);
-                    console.log("SET STATE");
                     this.setState({items: items, options: chartConfig});
-                    console.log(this.state);
-                    console.log("END");
-
                 }
             });
     }
 
     formatSeriesData(items) {
-        if(typeof items === 'object') {
-            var series = items.reduce(function(result, item) {
+        if (typeof items === 'object') {
+            var series = items.reduce(function (result, item) {
 
                 var seriesData = {
                     name: item.props.title,
                     id: item.props.id,
                     x: Date.UTC(item.props.baseTime, 0, 0),
                     info: item,
-                    y: 1};
+                    y: 1
+                };
 
                 result.push(seriesData);
                 return result;
@@ -91,9 +84,9 @@ class Api extends Component {
     renderItems(data) {
         var objects = data.narratives[0].objects;
 
-        if(objects.length > 0) {
+        if (objects.length > 0) {
 
-            var items = objects.reduce(function(result, item) {
+            var items = objects.reduce(function (result, item) {
                 var production;
 
                 for (var i = 0; i < item.production.length; i++) {
@@ -108,18 +101,18 @@ class Api extends Component {
 
                 }
 
-                if(production !== false) {
+                if (production !== false) {
                     result.push(
-                            <Item key={"item"+item._id}
-                                id={item._id}
-                                title={item.title}
-                                category={item.category}
-                                date={production}
-                                dateEarliest={item.production.dateEarliest}
-                                dateLatest={item.production.dateLatest}
-                                baseTime={parseInt(production,10)}
-                                image={item.images[0].url}
-                            />
+                        <Item key={"item" + item._id}
+                            id={item._id}
+                            title={item.title}
+                            category={item.category}
+                            date={production}
+                            dateEarliest={item.production.dateEarliest}
+                            dateLatest={item.production.dateLatest}
+                            baseTime={parseInt(production, 10)}
+                            image={item.images[0].url}
+                        />
                     );
                 }
 
@@ -142,7 +135,8 @@ class Api extends Component {
             })
         }).then(this.handleErrors)
             .then(response => {
-            return response.json() });
+                return response.json()
+            });
     }
 
     handleErrors(response) {
@@ -156,7 +150,7 @@ class Api extends Component {
         var options = this.state.options;
         var formattedSeries = this.formatSeriesData(this.state.items);
 
-        if(typeof formattedSeries !== 'undefined') {
+        if (typeof formattedSeries !== 'undefined') {
             options.series[0] = formattedSeries;
             options.tooltip.formatter = function () {
                 var tooltip = <Item key="tooltip"
@@ -174,7 +168,6 @@ class Api extends Component {
             return (
                 <div>
                     <Chart items={this.state.items} opts={options}/>
-
                 </div>
             );
         }

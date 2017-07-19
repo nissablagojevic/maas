@@ -7,9 +7,9 @@ import {
     } from "./";
 
 function Timeline(props) {
-        return (
-            <Api />
-        );
+    return (
+        <Api />
+    );
 }
 
 export default Timeline;

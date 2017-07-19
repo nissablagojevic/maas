@@ -2,9 +2,9 @@ import {
     default as React
     } from "react";
 
-function Series(props){
+function Series(props) {
     console.log("SERIES SAYS HELLO");
-        return(<div>HELLO</div>);
+    return (<div>HELLO</div>);
 
 }
 
