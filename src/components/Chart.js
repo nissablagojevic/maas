@@ -5,88 +5,164 @@ import {
 
 import Highcharts from "highcharts";
 
+import {
+    Item
+    } from "./";
+
 import ReactHighcharts from "react-highcharts";
 
 
-var options = {
-    chart: {
-        type: 'line',
-        zoomType: 'x',
-        panning: true,
-        panKey: 'shift',
-        resetZoomButton: {
-            relativeTo: 'chart'
-        }
-    },
-    credits: {
-        enabled: false
-    },
-    global: {
-        useUTC: false
-    },
-    loading: {},
-    navigator: {
-        adaptToUpdatedData: false
-    },
-    series: [{
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 295.6, 454.4]
-    }],
-    subtitle: {
-        text: 'subtitle'
-    },
-    title: {
-        text: 'title'
-    },
-    tooltip: {
-        xDateFormat: '%d %B %Y',
-        shared: true,
-        valueDecimals: 2
-    },
-    xAxis: [{
-        crosshair: true,
-        type: 'datetime',
-        minTickInterval: 24 * 3600 * 1000,
-        dateTimeLabelFormats: {
-            second: '%d %b \'%y<br/>%H:%M:%S',
-            minute: '%d %b \'%y<br/>%H:%M',
-            hour: '%d %b \'%y<br/>%H:%M',
-            day: '%d %b \'%y',
-            week: '%d %b \'%y',
-            month: '%b \'%y',
-            year: '%Y'
-        },
-        labels: {
-            rotation: 0
-        },
-        opposite: true
-    }]
-};
 
 class Chart extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            chart: {}
+            options: this.props.opts
         };
+
+
         console.log("CHART");
     }
 
     componentDidMount() {
-
+        console.log("CHART MOUNTED");
+        //this.defineExtremes();
     }
 
     componentWillUnmount() {
         this.chart.destroy();
     }
 
+
+
+    defineExtremes() {
+        console.log("defining extremes");
+        console.log(this.props.options);
+        var maxSeriesData = this.props.options.series[0].data.length - 1;
+
+
+            var extremes = Highcharts.charts[0].series[0].xAxis.getExtremes();
+
+
+
+            var setExt = {
+                min: this.props.options.series[0].data[0][0],
+                max: this.props.options.series[0].data[maxSeriesData][0]
+            };
+
+            //i want to set it to the largest min and the smallest max for init
+            if (extremes.max < setExt.max) {
+                setExt.max = extremes.max;
+            }
+            if (extremes.min > setExt.min) {
+                setExt.min = extremes.min;
+            }
+
+            Highcharts.charts[0].xAxis[0].setExtremes(
+                setExt.min,
+                setExt.max
+            );
+
+    }
+
+    /**
+     * Initialises chart
+     */
+    renderChart(config) {
+        console.log("CREATE CHART");
+        return(<ReactHighcharts config={config}/>);
+
+
+    }
+
     render() {
         return(
-            <div id="chart"><ReactHighcharts config={options}/></div>
+            <div id="chart">
+            {console.log("RENDER CHART")}
+            {console.log(this.state.options)}
+            {this.renderChart(this.state.options)}
+
+            </div>
         );
     }
 }
 
+
+
+Chart.defaultProps = {
+    options: {
+        chart: {
+            panKey: 'shift',
+            panning: true,
+            resetZoomButton: {
+                relativeTo: 'chart'
+            },
+            type: 'line',
+            zoomType: 'x'
+        },
+        credits: {
+            enabled: false
+        },
+        global: {
+            useUTC: false
+        },
+        loading: {},
+        navigator: {
+            adaptToUpdatedData: false
+        },
+        plotLines: {
+            style: {
+                visibility: "hidden"
+            }
+        },
+        series: [{
+            name: 'Loading...',
+            type: 'column'
+        }],
+        subtitle: {
+            text: 'subtitle'
+        },
+        title: {
+            text: 'title'
+        },
+        tooltip: {
+            shared: true,
+            valueDecimals: 2,
+            xDateFormat: '%d %B %Y'
+        },
+        xAxis: [{
+            crosshair: true,
+            dateTimeLabelFormats: {
+                second: '%d %b \'%y<br/>%H:%M:%S',
+                minute: '%d %b \'%y<br/>%H:%M',
+                hour: '%d %b \'%y<br/>%H:%M',
+                day: '%d %b \'%y',
+                week: '%d %b \'%y',
+                month: '%b \'%y',
+                year: '%Y'
+            },
+            plotLines: {
+                style: {
+                    color: "red"
+                    //visibility: "hidden"
+                }
+            },
+            labels: {
+                rotation: 0
+            },
+            //minTickInterval: 24 * 3600 * 1000,
+            opposite: true,
+            type: 'datetime',
+        }],
+        yAxis: {
+            min: 0,
+            max: 1,
+            tickAmount: 0
+
+        }
+    }
+};
 
 
 export default Chart;

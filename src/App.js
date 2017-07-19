@@ -34,7 +34,8 @@ class App extends Component {
                         { name: `description`, content: `maas api example application` },
                         { property: `og:type`, content: `article` },
                     ]}
-                />
+                    />
+
                 <Router>
                     <div>
                         <Navigation />

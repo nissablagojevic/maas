@@ -3,20 +3,14 @@ import {
     } from "react";
 
 import {
-    Api,
-    Chart
+    Api
     } from "./";
 
 function Timeline(props) {
+    console.log("TIMELINE");
 
         return (
-            <div className="Timeline">
-            {/*<h2>API</h2>
-                <Api />*/}
-                <h2>Chart</h2>
-                <Chart />
-
-            </div>
+            <Api />
         );
 
 }

@@ -8,7 +8,9 @@ import Timeline from "./Timeline";
 
 import Item from "./Item";
 
-import Collection from "./Collection";
+import PlotLine from "./PlotLine";
+
+import Series from "./Series";
 
 import Chart from "./Chart";
 
@@ -18,6 +20,7 @@ export {
     About,
     Api,
     Item,
-    Collection,
     Chart,
+    Series,
+    PlotLine
     };
