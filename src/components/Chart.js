@@ -73,12 +73,7 @@ Chart.defaultProps = {
                 relativeTo: 'chart'
             },
             type: 'column',
-            zoomType: 'x',
-            events: {
-                load: function () {
-                    //this.myTooltip = new Highcharts.Tooltip(this, this.options.tooltip);
-                }
-            }
+            zoomType: 'x'
         },
         credits: {
             enabled: false
@@ -92,14 +87,6 @@ Chart.defaultProps = {
         },
         plotOptions: {
             series: {
-                borderWidth: 0,
-                cursor: 'pointer',
-                events: {
-                    click: function (evt) {
-                        //this.chart.myTooltip.refresh(evt.point, evt);
-                    }
-                },
-                pointWidth: 10,
                 point: {
                     events: {
                         click: function () {
@@ -114,15 +101,15 @@ Chart.defaultProps = {
             type: 'column'
         }],
         subtitle: {
-            text: 'subtitle'
+            text: 'Exploring MAAS collections by production date'
         },
         title: {
-            text: 'title'
+            text: 'Collection Timeline'
         },
         tooltip: {
             followPointer: false,
             headerFormat: '',
-            shared: false,
+            shared: true,
             valueDecimals: 2,
             xDateFormat: '%d %B %Y',
             useHTML: true,

@@ -1,16 +1,12 @@
-import {
-    default as React
-    } from "react";
-
-function Series(props) {
-    console.log("SERIES SAYS HELLO");
-    return (<div>HELLO</div>);
-
+function Series() {
 }
 
 Series.defaultProps = {
-    color: '#000',
-    width: 5
+    borderWidth: 0,
+    cursor: 'pointer',
+    pointWidth: 10,
+    color: 'rgba(0, 0, 0, 0.50)',
+    width: 10
 };
 
 export default Series;

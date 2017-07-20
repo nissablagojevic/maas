@@ -154,13 +154,13 @@ class Api extends Component {
             options.series[0] = formattedSeries;
             options.tooltip.formatter = function () {
                 var tooltip = <Item key="tooltip"
-                    id={this.point.id}
-                    title={this.point.info.props.title}
-                    category={this.point.info.props.category}
-                    date={this.point.info.props.date}
-                    dateEarliest={this.point.info.props.dateEarliest}
-                    dateLatest={this.point.info.props.dateLatest}
-                    image={this.point.info.props.image}
+                    id={this.points[0].point.id}
+                    title={this.points[0].point.info.props.title}
+                    category={this.points[0].point.info.props.category}
+                    date={this.points[0].point.info.props.date}
+                    dateEarliest={this.points[0].point.info.props.dateEarliest}
+                    dateLatest={this.points[0].point.info.props.dateLatest}
+                    image={this.points[0].point.info.props.image}
                 />;
                 return ReactDOMServer.renderToStaticMarkup(tooltip);
             };

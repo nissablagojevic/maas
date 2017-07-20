@@ -21,17 +21,17 @@ import Helmet from "react-helmet";
 class App extends Component {
 
 
-  render() {
-    return (
+    render() {
+        return (
             <div id="page">
                 <Helmet
                     titleTemplate="%s | MAAS API example | Nissa Blagojevic"
                     meta={[
-                        { name: `viewport`, content: `width=device-width, initial-scale=1` },
-                        { name: `description`, content: `maas api example application` },
-                        { property: `og:type`, content: `article` },
+                        {name: `viewport`, content: `width=device-width, initial-scale=1`},
+                        {name: `description`, content: `maas api example application`},
+                        {property: `og:type`, content: `article`},
                     ]}
-                    />
+                />
 
                 <Router>
                     <div>
@@ -46,8 +46,8 @@ class App extends Component {
 
 
 
-    );
-  }
+        );
+    }
 }
 
 export default App;

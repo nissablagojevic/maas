@@ -39,9 +39,7 @@ export default function About(props) {
     return (
         <section>
             <h2>Package.json</h2>
-            <p>
-            {JSON.stringify(packageJson)}
-            </p>
+            <pre>{packageJson}</pre>
         </section>
 
     );
