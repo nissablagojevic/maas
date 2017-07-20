@@ -3,9 +3,10 @@ function Series() {
 
 Series.defaultProps = {
     borderWidth: 0,
+    color: 'rgba(0, 0, 0, 0.50)',
     cursor: 'pointer',
     pointWidth: 10,
-    color: 'rgba(0, 0, 0, 0.50)',
+    stickyTracking: false,
     width: 10
 };
 

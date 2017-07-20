@@ -40,7 +40,8 @@ class Api extends Component {
   }
 }`,
             items: '',
-            options: Chart.defaultProps.options
+            options: Chart.defaultProps.options,
+            collectionName: ''
         };
     }
 
@@ -53,8 +54,9 @@ class Api extends Component {
 
                 if (typeof data === 'object') {
                     var items = this.renderItems(data);
+                    var collectionName = data.narratives[0].title;
                     var chartConfig = this.state.options;
-                    this.setState({items: items, options: chartConfig});
+                    this.setState({items: items, options: chartConfig, collectionName: collectionName});
                 }
             });
     }
@@ -75,7 +77,7 @@ class Api extends Component {
                 return result;
             }, []);
 
-            var seriesArray = <Series data={series}/>;
+            var seriesArray = <Series data={series} name={this.state.collectionName}/>;
 
             return seriesArray.props;
         }

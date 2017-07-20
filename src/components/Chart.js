@@ -81,21 +81,8 @@ Chart.defaultProps = {
         global: {
             useUTC: false
         },
-        loading: {},
         navigator: {
             adaptToUpdatedData: false
-        },
-        plotOptions: {
-            series: {
-                point: {
-                    events: {
-                        click: function () {
-                            console.log('value: ' + this.x);
-                        }
-                    }
-                },
-                stickyTracking: false
-            }
         },
         series: [{
             type: 'column'
