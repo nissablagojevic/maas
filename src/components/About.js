@@ -1,10 +1,7 @@
-import {
-    default as React
-    } from "react";
-
+import { default as React } from 'react';
 
 export default function About(props) {
-    var packageJson = `{
+  var packageJson = `{
   "name": "maas",
   "version": "0.1.0",
   "private": true,
@@ -35,11 +32,12 @@ export default function About(props) {
     "eject": "react-scripts eject"
   }
 }`;
-    return (
-        <section>
-            <h2>Package.json</h2>
-            <pre>{packageJson}</pre>
-        </section>
-
-    );
+  return (
+    <section>
+      <h2>Package.json</h2>
+      <pre>
+        {packageJson}
+      </pre>
+    </section>
+  );
 }

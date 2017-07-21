@@ -1,15 +1,9 @@
-import {
-    default as React,
-    } from "react";
+import { default as React } from 'react';
 
-import {
-    Api
-    } from "./";
+import { Api } from './';
 
 function Timeline(props) {
-    return (
-        <Api />
-    );
+  return <Api />;
 }
 
 export default Timeline;

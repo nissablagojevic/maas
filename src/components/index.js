@@ -1,23 +1,15 @@
-import Navigation from "./Navigation";
+import Navigation from './Navigation';
 
-import About from "./About";
+import About from './About';
 
-import Api from "./Api";
+import Api from './Api';
 
-import Timeline from "./Timeline";
+import Timeline from './Timeline';
 
-import Item from "./Item";
+import Item from './Item';
 
-import Series from "./Series";
+import Series from './Series';
 
-import Chart from "./Chart";
+import Chart from './Chart';
 
-export {
-    Timeline,
-    Navigation,
-    About,
-    Api,
-    Item,
-    Chart,
-    Series,
-    };
+export { Timeline, Navigation, About, Api, Item, Chart, Series };
