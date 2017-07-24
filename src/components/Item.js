@@ -1,25 +1,21 @@
 import { default as React } from 'react';
 
+import './Item.css';
+
 function Item(props) {
   var title = props.title || 'Untitled';
   return (
     <button
       className="item-tile"
       id={'itemTile' + props.id}
-      style={{
-        pointerEvents: 'visible',
-        display: 'block',
-        maxWidth: 240,
-        whiteSpace: 'normal'
-      }}
     >
       <div className="tile-image-tag">
         {props.category}
       </div>
       {props.name}
-      <a className="item-tile__image-holder" href="#">
+      <a className="item-tile__image-holder" href={props.image}>
         <div className="maas-image object-image is-loaded has-aspect-ratio">
-          <img src={props.image} style={{ width: 200, height: 200 }} />
+          <img src={props.image} alt={title} style={{ width: 200, height: 200 }} />
         </div>
       </a>
       <div className="tile-info tile-info--is-breakout">
