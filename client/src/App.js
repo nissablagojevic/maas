@@ -20,7 +20,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("WORDPRESS");
-    fetchQuery('http://nissablagojevic.dev/wp-json/wp/v2/pages/154?_embed', {method: 'GET'})
+    fetchQuery('https://nissablagojevic.dev/wp-json/wp/v2/pages/154?_embed', {method: 'GET'})
         .then(json => {
           console.log("JSON");
           console.log(json);
