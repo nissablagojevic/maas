@@ -2,7 +2,14 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-app.use('/maas', express.static(path.join(__dirname, 'client/build')));
-app.use('/maas/client/build', express.static(path.join(__dirname, 'client/build')));
+if(process.env.NODE_ENV !== 'production') {
+    app.use('/', express.static(path.join(__dirname, 'client/build')));
+    app.use('/client/build', express.static(path.join(__dirname, 'client/build')));
+}
+else {
+    app.use('/maas', express.static(path.join(__dirname, 'client/build')));
+    app.use('/maas/client/build', express.static(path.join(__dirname, 'client/build')));
+}
+
 
 app.listen(3000);

@@ -14,6 +14,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      development: process.env.NODE_ENV,
       wordPress: ''
     }
   }
@@ -59,6 +60,22 @@ class App extends Component {
     return wP;
   }
 
+  renderRoutes() {
+    var prefix = '/';
+
+    if(this.state.development === 'production') {
+      prefix = '/maas/';
+    }
+
+      return(<div className="routes">
+        <Route exact path={prefix} component={Timeline} />
+        <Route path={prefix + 'about'} component={About} />
+      </div>);
+
+  }
+
+
+
   render() {
     return (
       <div id="page">
@@ -90,8 +107,8 @@ class App extends Component {
         <Router>
           <div>
             <Navigation />
-            <Route exact path="/" component={Timeline} />
-            <Route path="/about" component={About} />
+
+          {this.renderRoutes()}
           {/** {this.renderApp(this.state.wordPress)}**/}
           </div>
         </Router>
