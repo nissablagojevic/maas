@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("WORDPRESS");
+    /**console.log("WORDPRESS");
     fetchQuery('https://nissablagojevic.dev/wp-json/wp/v2/pages/154?_embed', {method: 'GET'})
         .then(json => {
           console.log("JSON");
@@ -28,7 +28,7 @@ class App extends Component {
             this.setState({wordPress: json});
           }
           return json;
-        });
+        });**/
   }
 
   handleErrors(response) {
@@ -92,7 +92,7 @@ class App extends Component {
             <Navigation />
             <Route exact path="/" component={Timeline} />
             <Route path="/about" component={About} />
-              {this.renderApp(this.state.wordPress)}
+          {/** {this.renderApp(this.state.wordPress)}**/}
           </div>
         </Router>
       </div>
