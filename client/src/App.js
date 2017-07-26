@@ -14,10 +14,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      development: process.env.NODE_ENV,
+      development: '',
       wordPress: ''
     }
   }
+
 
   componentDidMount() {
     /**console.log("WORDPRESS");
@@ -62,7 +63,6 @@ class App extends Component {
 
   renderRoutes() {
     var prefix = '/';
-
     if(this.state.development === 'production') {
       prefix = '/maas/';
     }
@@ -74,7 +74,18 @@ class App extends Component {
 
   }
 
+  setEnv() {
+    var currentUrl = window.location.host;
+    var development = this.state.development;
 
+    if(currentUrl.indexOf('nissablagojevic') >= 0) {
+      development = 'production';
+    }
+    else {
+      development = 'development';
+    }
+    return development;
+  }
 
   render() {
     return (
@@ -106,7 +117,7 @@ class App extends Component {
 
         <Router>
           <div>
-            <Navigation />
+            <Navigation development={this.setEnv()}/>
 
           {this.renderRoutes()}
           {/** {this.renderApp(this.state.wordPress)}**/}

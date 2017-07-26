@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 function Navigation(props) {
-console.log(props.development);
   var prefix = '/';
 
   if(props.development === 'production') {

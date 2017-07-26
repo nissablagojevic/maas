@@ -1,0 +1,14 @@
+{
+  "name"        : "express-server",
+  "args"        : "DEBUG=express:* ",
+  "script"      : "server.js",
+  "watch"       : true,
+  "merge_logs"  : true,
+  "cwd"         : "/var/www/nissablagojevic.com.au/public_html/maas",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "env_production" : {
+    "NODE_ENV": "production"
+  }
+}
