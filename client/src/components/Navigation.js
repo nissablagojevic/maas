@@ -6,7 +6,6 @@ import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 function Navigation(props) {
   var prefix = '/';
-
   if(props.development === 'production') {
     prefix = '/maas/';
   }

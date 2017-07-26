@@ -61,9 +61,9 @@ class App extends Component {
     return wP;
   }
 
-  renderRoutes() {
+  renderRoutes(env) {
     var prefix = '/';
-    if(this.state.development === 'production') {
+    if(env === 'production') {
       prefix = '/maas/';
     }
 
@@ -77,7 +77,6 @@ class App extends Component {
   setEnv() {
     var currentUrl = window.location.host;
     var development = this.state.development;
-
     if(currentUrl.indexOf('nissablagojevic') >= 0) {
       development = 'production';
     }
@@ -119,7 +118,7 @@ class App extends Component {
           <div>
             <Navigation development={this.setEnv()}/>
 
-          {this.renderRoutes()}
+          {this.renderRoutes(this.setEnv())}
           {/** {this.renderApp(this.state.wordPress)}**/}
           </div>
         </Router>
