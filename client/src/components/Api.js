@@ -17,7 +17,7 @@ class Api extends Component {
   narratives(filter:{_id: 69}) {
     _id
     title
-    objects(limit: 40) {
+    objects(limit: 100) {
       _id
       title
       displayTitle
@@ -49,7 +49,6 @@ class Api extends Component {
           if (typeof data === 'object') {
             var items = this.renderItems(data);
             var collectionName = data.narratives[0].title;
-            console.log(data.narratives[0]);
             var chartConfig = this.state.options;
             this.setState({
               items: items,
@@ -61,14 +60,31 @@ class Api extends Component {
   }
 
   formatSeriesData(items) {
+      var thumbDims = 100;
+
     if (typeof items === 'object') {
+        var yearData = [];
       var series = items.reduce(function (result, item) {
+          var date = Date.UTC(item.props.baseTime, 0, 0);
+
+          yearData.push(date);
+          var counts = {};
+
+          for(var i = 0; i< yearData.length; i++) {
+              var num = yearData[i];
+              counts[num] = counts[num] ? counts[num]+1 : 1;
+          }
         var seriesData = {
+            id: item.props.id,
           name: item.props.title,
-          id: item.props.id,
-          x: Date.UTC(item.props.baseTime, 0, 0),
+          x: date,
           info: item,
-          y: 1
+          y: counts[date] * thumbDims,
+            marker: {
+                symbol: 'url(' + item.props.image + ')',
+                height: thumbDims,
+                width: thumbDims
+            }
         };
 
         result.push(seriesData);
@@ -134,16 +150,19 @@ class Api extends Component {
     if (typeof formattedSeries !== 'undefined') {
       options.series[0] = formattedSeries;
       options.tooltip.formatter = function () {
+
+          var item = this.point || this.points[0].point;
         var tooltip = (
+
             <Item
                 key="tooltip"
-                id={this.points[0].point.id}
-                title={this.points[0].point.info.props.title}
-                category={this.points[0].point.info.props.category}
-                date={this.points[0].point.info.props.date}
-                dateEarliest={this.points[0].point.info.props.dateEarliest}
-                dateLatest={this.points[0].point.info.props.dateLatest}
-                image={this.points[0].point.info.props.image}
+                id={item.id}
+                title={item.info.props.title}
+                category={item.info.props.category}
+                date={item.info.props.date}
+                dateEarliest={item.info.props.dateEarliest}
+                dateLatest={item.info.props.dateLatest}
+                image={item.info.props.image}
             />
         );
         return ReactDOMServer.renderToStaticMarkup(tooltip);

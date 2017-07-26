@@ -21,24 +21,16 @@ class Chart extends Component {
   }
 
   defineExtremes() {
-    var maxSeriesData = this.props.options.series[0].data.length - 1;
+    var extremesY = Highcharts.charts[0].series[0].yAxis.getExtremes();
 
-    var extremes = Highcharts.charts[0].series[0].xAxis.getExtremes();
-
-    var setExt = {
-      min: this.props.options.series[0].data[0][0],
-      max: this.props.options.series[0].data[maxSeriesData][0]
+    var padding = 100;
+    
+    var setExtY = {
+      min: extremesY.dataMin - padding,
+      max: extremesY.dataMax + padding
     };
 
-    //i want to set it to the largest min and the smallest max for init
-    if (extremes.max < setExt.max) {
-      setExt.max = extremes.max;
-    }
-    if (extremes.min > setExt.min) {
-      setExt.min = extremes.min;
-    }
-
-    Highcharts.charts[0].xAxis[0].setExtremes(setExt.min, setExt.max);
+    Highcharts.charts[0].yAxis[0].setExtremes(setExtY.min, setExtY.max);
   }
 
   /**
@@ -61,11 +53,12 @@ Chart.defaultProps = {
   options: {
     chart: {
       panKey: 'shift',
+      height: '40%',
       panning: true,
       resetZoomButton: {
         relativeTo: 'chart'
       },
-      type: 'column',
+      type: 'scatter',
       zoomType: 'x'
     },
     credits: {
@@ -77,11 +70,7 @@ Chart.defaultProps = {
     navigator: {
       adaptToUpdatedData: false
     },
-    series: [
-      {
-        type: 'column'
-      }
-    ],
+    series: [],
     subtitle: {
       text: 'Exploring MAAS collections by production date'
     },
@@ -109,6 +98,7 @@ Chart.defaultProps = {
           month: "%b '%y",
           year: '%Y'
         },
+        minRange: 315400000000,
         labels: {
           rotation: 0
         },
@@ -117,9 +107,15 @@ Chart.defaultProps = {
       }
     ],
     yAxis: {
-      min: 0,
-      max: 1,
-      tickAmount: 0
+      labels: {
+        //enabled: false
+      },
+      minPadding: 50,
+      tickAmount: 1,
+
+      title: {
+        enabled: false
+      }
     }
   }
 };

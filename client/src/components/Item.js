@@ -13,11 +13,6 @@ function Item(props) {
         {props.category}
       </div>
       {props.name}
-      <a className="item-tile__image-holder" href={props.image}>
-        <div className="maas-image object-image is-loaded has-aspect-ratio">
-          <img src={props.image} alt={title} style={{ width: 200, height: 200 }} />
-        </div>
-      </a>
       <div className="tile-info tile-info--is-breakout">
         <div className="tile-info__body">
           <h3>
